@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<addon addon_id="NixFifty_IPS2UBS" title="NixFifty: IPS Blogs to UBS" version_string="1.0.4" version_id="1000470" url="https://nixfifty.com/" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="">
+  <admin_navigation/>
+  <admin_permissions/>
+  <admin_style_properties/>
+  <admin_templates>
+    <template title="nf_ips2ubs_import_config"><![CDATA[<xen:title>{xen:phrase configure_importer}: {$name}</xen:title>
+
+<xen:form action="{xen:adminlink import/config}">
+	{xen:phrase nflj_ubs_choose_database_to_import_from_explain, 'name={$addOnName}'}
+
+	<fieldset>
+		<xen:textboxunit label="{xen:phrase mysql_server}:" name="config[db][host]"
+			value="{$input.sql_host}" placeholder="$INFO['sql_host']" />
+		<xen:textboxunit label="{xen:phrase mysql_port}:" name="config[db][port]"
+			value="{$input.sql_port}" />
+		<xen:textboxunit label="{xen:phrase mysql_user_name}:" name="config[db][username]"
+			value="{$input.sql_user}" placeholder="$INFO['sql_user']" />
+		<xen:textboxunit label="{xen:phrase mysql_password}:" name="config[db][password]"
+			value="{$input.sql_pass}" placeholder="$INFO['sql_pass']" autocomplete="off" />
+		<xen:textboxunit label="{xen:phrase mysql_database_name}:" name="config[db][dbname]"
+			value="{$input.sql_database}" placeholder="$INFO['sql_database']" />
+		<xen:textboxunit label="{xen:phrase table_prefix}:" name="config[db][prefix]"
+			value="{$input.sql_tbl_prefix}" placeholder="$INFO['sql_tbl_prefix']" />
+		<xen:textboxunit label="{xen:phrase force_character_set}:" name="config[db][charset]"
+			value="">
+			<xen:explain>{xen:phrase force_data_read_specific_mysql_character_set}</xen:explain>
+		</xen:textboxunit>
+	</fieldset>
+	
+	<xen:textboxunit label="{xen:phrase path_to_ipboard}:" name="config[ipboard_path]"
+		value="{$input.ipboard_path}" explain="{xen:phrase path_to_ipboard_explain}" />
+		
+	<xen:textboxunit label="{xen:phrase nf_ips2ubs_archived_import_log}:" name="config[importLog]">
+		<xen:explain>{xen:phrase nf_ips2ubs_archived_import_log_explain, 'product={$productName}'}</xen:explain>
+	</xen:textboxunit>
+	
+	<xen:submitunit save="{xen:phrase validate_configuration}" />
+		
+	<input type="hidden" name="config[retain_keys]" value="{$retainKeys}" />
+	<input type="hidden" name="importer" value="{$importer}" />
+</xen:form>]]></template>
+  </admin_templates>
+  <admin_template_modifications/>
+  <code_events/>
+  <code_event_listeners>
+    <listener event_id="load_class_model" execute_order="10" callback_class="NixFifty_IPS2UBS_Listen" callback_method="extendImportModel" active="1" hint="XenForo_Model_Import" description="Listens for the XenForo_Model_Import class."/>
+  </code_event_listeners>
+  <cron/>
+  <email_templates/>
+  <email_template_modifications/>
+  <optiongroups/>
+  <permissions>
+    <permission_groups/>
+    <permissions/>
+    <interface_groups/>
+  </permissions>
+  <phrases>
+    <phrase title="nf_ips2ubs_no_import_log_table_specified" version_id="1000170" version_string="1.0.1"><![CDATA[No import log table specified.]]></phrase>
+    <phrase title="nf_ips2ubs_table_x_does_not_exist" version_id="1000170" version_string="1.0.1"><![CDATA[Table {tablename} does not exist.]]></phrase>
+  </phrases>
+  <route_prefixes/>
+  <style_properties/>
+  <templates/>
+  <public_template_modifications/>
+  <bb_code_media_sites/>
+  <bb_codes/>
+</addon>
